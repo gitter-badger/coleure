@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @colorpalette.name %>
+</p>
+
+<p>
+	<%= render @colorpalette.coloritems %>
+</p>
+
+<%= link_to 'Edit', edit_colorpalette_path(@colorpalette) %> |
+<%= link_to 'Back', colorpalettes_path %>

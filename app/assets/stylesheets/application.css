@@ -291,6 +291,15 @@ svg {
 	background: #333;
 }
 
+button#save-palette {
+	display: block;
+	width: 100%;
+	padding: 10px 0;
+	margin-bottom: 15px;
+	font-size: 14px;
+	background: #232323;
+	color: #fff;
+}
 
 
 #palette, .the-rest {
@@ -333,12 +342,12 @@ svg {
 #palette .active-palette {
 	margin-right: 5px;
 }
-#palette button {
+/*#palette button {
 	position: relative;
 	top: -0.3em;
 	padding: 3px 5px;
 	font-size: 0.4166em;
-}
+}*/
 #palette h2 {
 	margin-bottom: -0.39em;
 	font-size: 48px;

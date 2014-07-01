@@ -15,7 +15,6 @@
         paletteColorDrop, 
         paletteColorOver, 
         paletteColors, 
-        paletteItems, 
         palettesDropdown,
         palettesDropdownLabel, 
         palettesList, 
@@ -27,11 +26,10 @@
         colorOrigin;
     palettesDropdownLabel = null;
     palettesList = null;
-    paletteItems = null;
     paletteColors = null;
     dropMessage = null;
     colorTemplate = null;
-    activePalette = null;
+    activePalette = [];
     colorDrag = function(event) {
       var color, data;
       color = event.target;
@@ -65,7 +63,7 @@
       data = JSON.parse(event.dataTransfer.getData('text'));
       data.inpalette = "true";
       data.index = activePalette.length;
-      data.paletteIndex = settings.activePaletteIndex;
+      data.paletteIndex = 1;
       addColor(data);
     };
     paletteColorDrag = function(event) {
@@ -99,61 +97,6 @@
         }
       }, 200)
     }
-    newPaletteField_changeHandler = function(event) {
-      var field;
-      field = event.target;
-      createPalette(field.value);
-      dropdownAppearanceHandler();
-      return field.value = '';
-    };
-    palettesList_clickHandler = function(event) {
-      var clickedElement;
-      clickedElement = event.target;
-      if (clickedElement.classList.contains('remove-option')) {
-        if (confirm('Are you sure you want to delete this palette?')) { removePalette(clickedElement.parentNode); }
-        if(settings.palettes.length === 0) {
-          createPalette('Default');
-          switchPalette('0');
-          dropdownAppearanceHandler();
-        }
-      } else {
-        if (!clickedElement.classList.contains('select-option')) {
-          clickedElement = clickedElement.parentNode;
-        }
-        dropdownAppearanceHandler();
-        return switchPalette(_.indexOf(paletteItems, clickedElement));
-      }
-    };
-    createPalette = function(name) {
-      settings.palettes.push({
-        name: name,
-        colors: []
-      });
-      addPalette(name);
-      return switchPalette(paletteItems.length - 1);
-    };
-    addPalette = function(name) {
-      var newPalette;
-      newPalette = _.create('li');
-      palettesList.appendChild(newPalette);
-      return newPalette.outerHTML = "<li class='select-option'>\n  <span class='name-option'>" + name + "</span>\n  <a class='remove-option right'>delete</a>\n</li>";
-    };
-    switchPalette = function(index) {
-      var palette, previousPalette;
-      if (settings.activePaletteIndex === index) {
-        return;
-      }
-      previousPalette = paletteItems[settings.activePaletteIndex];
-      if (previousPalette) {
-        previousPalette.classList.remove('selected');
-      }
-      palette = paletteItems[index];
-      palette.classList.add('selected');
-      settings.activePaletteIndex = index;
-      activePalette = settings.palettes[index].colors;
-      palettesDropdownLabel.innerHTML = _.cls(palette, 'name-option')[0].innerHTML;
-      return _.template(colorTemplate, replaceColors);
-    };
     replaceColors = function(template) {
       var color, _i, _len;
       while (paletteColors.firstChild) {
@@ -174,12 +117,6 @@
         return _.show(dropMessage);
       }
     };
-    removePalette = function(element) {
-      var index;
-      index = _.indexOf(paletteItems, element);
-      settings.palettes.splice(index, 1);
-      return _.remove(element);
-    };
     insertColor = function(template, color) {
       var el;
       el = _.create('i');
@@ -199,15 +136,6 @@
       removeColor: removeColor,
       setup: function(options) {
         var activePaletteIndex, dropzone, newPaletteField, palette, _i, _len, _ref;
-        palettesDropdown = _.cls('select-options')[0];
-        palettesDropdownLabel = _.cls('active-palette')[0];
-        palettesEditBtn = _.id('edit-palettes');
-        palettesList = _.tag(palettesDropdown, 'ul')[0];
-        _.listen(palettesList, 'click', palettesList_clickHandler);
-        paletteItems = palettesList.children;
-        newPaletteField = _.tag(palettesDropdown, 'input')[0];
-        _.listen(newPaletteField, 'change', newPaletteField_changeHandler);
-        _.listen(palettesEditBtn, 'click', dropdownAppearanceHandler);
         dropzone = _.id('palette');
         _.listen(dropzone, 'dragenter', colorOver);
         _.listen(dropzone, 'dragover', colorOver);
@@ -222,13 +150,11 @@
         dropMessage = _.id('drop-message');
         colorTemplate = options.template;
         _ref = settings.palettes;
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          palette = _ref[_i];
-          addPalette(palette.name);
-        }
-        activePaletteIndex = settings.activePaletteIndex;
-        settings.activePaletteIndex = -1;
-        return switchPalette(activePaletteIndex);
+        // for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          // palette = _ref[_i];
+          // addPalette(palette.name);
+        // }
+        activePaletteIndex = 0;
       }
     }
   });

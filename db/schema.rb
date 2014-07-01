@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140629023517) do
+ActiveRecord::Schema.define(version: 20140701135623) do
 
   create_table "coloritems", force: true do |t|
     t.string   "name"
@@ -37,7 +37,10 @@ ActiveRecord::Schema.define(version: 20140629023517) do
     t.boolean  "mixed"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "palette_id"
   end
+
+  add_index "colors", ["palette_id"], name: "index_colors_on_palette_id"
 
   create_table "palettes", force: true do |t|
     t.string   "name"

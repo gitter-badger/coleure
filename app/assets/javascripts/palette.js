@@ -53,9 +53,15 @@
         return insertColor(template, data);
       });
       _.hide(dropMessage);
-      console.log(data)
-      console.log(activePalette)
       activePalette.push(data);
+      var request = new XMLHttpRequest();
+      request.open("POST", "colors/", true);
+      request.onreadystatechange = function () {
+        if (request.readyState != 4 || request.status != 200) return;
+        alert("Success: " + request.responseText);
+      };
+      request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+      request.send("color[name]='Yellow'&color[hex]='fff700'&color[mixed]='false'");
     }
     colorDrop = function(event) {
       var data;

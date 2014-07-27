@@ -58,7 +58,8 @@
       request.open("POST", "colors/", true);
       request.onreadystatechange = function () {
         if (request.readyState != 4 || request.status != 200) return;
-        alert("Success: " + request.responseText);
+        data = JSON.parse(request.responseText);
+        history.pushState(null, null, window.location.origin + "/palettes/" + data["id"] + "/edit")
       };
       request.setRequestHeader('Accept', 'application/json');
       request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');

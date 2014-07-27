@@ -55,7 +55,7 @@
       _.hide(dropMessage);
       activePalette.push(data);
       var request = new XMLHttpRequest();
-      request.open("POST", "colors/", true);
+      request.open("POST", "/colors", true);
       request.onreadystatechange = function () {
         if (request.readyState != 4 || request.status != 200) return;
         data = JSON.parse(request.responseText);

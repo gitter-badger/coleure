@@ -1,27 +1,27 @@
 (function() {
 
   define(['./goodies', './settings'], function(_, settings) {
-    var activePalette, 
-        addPalette, 
-        colorDrag, 
-        colorDrop, 
-        colorOver, 
-        colorTemplate, 
-        createPalette, 
-        dropMessage, 
-        insertColor, 
-        newPaletteField_changeHandler, 
-        paletteColorDrag, 
-        paletteColorDrop, 
-        paletteColorOver, 
-        paletteColors, 
+    var activePalette,
+        addPalette,
+        colorDrag,
+        colorDrop,
+        colorOver,
+        colorTemplate,
+        createPalette,
+        dropMessage,
+        insertColor,
+        newPaletteField_changeHandler,
+        paletteColorDrag,
+        paletteColorDrop,
+        paletteColorOver,
+        paletteColors,
         palettesDropdown,
-        palettesDropdownLabel, 
-        palettesList, 
-        palettesList_clickHandler, 
-        removePalette, 
-        replaceColors, 
-        setup, 
+        palettesDropdownLabel,
+        palettesList,
+        palettesList_clickHandler,
+        removePalette,
+        replaceColors,
+        setup,
         switchPalette,
         colorOrigin;
     palettesDropdownLabel = null;
@@ -60,6 +60,7 @@
         if (request.readyState != 4 || request.status != 200) return;
         alert("Success: " + request.responseText);
       };
+      request.setRequestHeader('Accept', 'application/json');
       request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
       request.send("color[name]='Yellow'&color[hex]='fff700'&color[mixed]='false'");
     }
@@ -110,7 +111,7 @@
       }
       for (_i = 0, _len = activePalette.length; _i < _len; _i++) {
         color = activePalette[_i];
-        if (!color.mixed) { 
+        if (!color.mixed) {
           color.mixed = 'false';
         }
         color.index = _i;

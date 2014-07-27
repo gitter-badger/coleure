@@ -13,23 +13,8 @@
 
 ActiveRecord::Schema.define(version: 20140701135623) do
 
-  create_table "coloritems", force: true do |t|
-    t.string   "name"
-    t.string   "hex"
-    t.boolean  "mixed"
-    t.integer  "order"
-    t.integer  "colorpalette_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "coloritems", ["colorpalette_id"], name: "index_coloritems_on_colorpalette_id"
-
-  create_table "colorpalettes", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "colors", force: true do |t|
     t.string   "name"
@@ -40,7 +25,7 @@ ActiveRecord::Schema.define(version: 20140701135623) do
     t.integer  "palette_id"
   end
 
-  add_index "colors", ["palette_id"], name: "index_colors_on_palette_id"
+  add_index "colors", ["palette_id"], name: "index_colors_on_palette_id", using: :btree
 
   create_table "palettes", force: true do |t|
     t.string   "name"

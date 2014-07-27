@@ -1,16 +1,16 @@
 class PalettesController < ApplicationController
-  before_action :set_palette
+  before_action :set_palette, only: [:show, :edit]
+
+  def new;  end
+  def edit; end
 
   def show
     redirect_to edit_palette_path(@palette)
   end
 
-  def edit
-  end
-
   private
 
   def set_palette
-    @palette = Palete.find(params[:id])
+    @palette = Palette.find(params[:id])
   end
 end

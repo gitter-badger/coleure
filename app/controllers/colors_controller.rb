@@ -1,15 +1,21 @@
 class ColorsController < ApplicationController
   def create
-    palette = Palette.with_color(color_params)
+    @palette = Palette.with_color(color_params)
 
-    redirect_to edit_palette_path(palette)
+    respond_to do |format|
+      format.html { redirect_to edit_palette_path(@palette) }
+      format.json { render json: @palette }
+    end
   end
 
   def destroy
-    color   = Color.find(params[:id])
-    palette = color.palette.without_color(color.hex)
+    @color   = Color.find(params[:id])
+    @palette = @color.palette.without_color(@color.hex)
 
-    redirect_to edit_palette_path(palette)
+    respond_to do |format|
+      format.html { redirect_to edit_palette_path(@palette) }
+      format.json { render json: @palette }
+    end
   end
 
   private

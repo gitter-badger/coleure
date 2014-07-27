@@ -5,7 +5,10 @@ class PalettesController < ApplicationController
   def edit; end
 
   def show
-    redirect_to edit_palette_path(@palette)
+    respond_to do |format|
+      format.html { redirect_to edit_palette_path(@palette) }
+      format.json { render json: @palette }
+    end
   end
 
   private

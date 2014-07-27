@@ -12,4 +12,3 @@
 //
 //= require color.min
 //= require vminpoly.min
-//= require turbolinks

@@ -44,12 +44,12 @@ body {
 	background: #232323;
 }
 
-a { 
-	color: #0083b1; 
+a {
+	color: #0083b1;
 	cursor: pointer;
 }
 
-aside, footer, header, section { 
+aside, footer, header, section {
 	display: block;
 }
 
@@ -82,13 +82,13 @@ kbd {
 	float: right;
 }
 .clear:before,
-.clear:after { 
-	content: "\0020"; 
-	display: block; 
-	height: 0; 
-	visibility: hidden; 
-} 
-.clear:after { 
+.clear:after {
+	content: "\0020";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+.clear:after {
 	clear: both;
 }
 
@@ -164,7 +164,6 @@ svg {
 }
 .format-settings p + p {
 	margin-top: 10px;
-	font-size: ;
 }
 
 /* Layout */
@@ -176,7 +175,7 @@ svg {
 	transition: all .3s ease;
 }
 #library {
-	width: 82.5%; 
+	width: 82.5%;
 	height: 100%;
 	background: #232323;
 	overflow-y: hidden;
@@ -242,7 +241,7 @@ svg {
 }
 
 #panels, #logo, #palette {
-	position: fixed; 
+	position: fixed;
 }
 
 #panels, #palette {
@@ -707,7 +706,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 .color-editor::after {
 	position: absolute;
-	content: ''; 
+	content: '';
 	top: 10px;
 	left: 100%;
 	border: 13px solid transparent;
@@ -805,7 +804,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 /* Icons */
-.close { 
+.close {
 	/* Use with '&times;' */
 	width: 30px;
 	height: 30px;

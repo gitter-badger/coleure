@@ -7,7 +7,7 @@ class PalettesController < ApplicationController
   def show
     respond_to do |format|
       format.html { redirect_to edit_palette_path(@palette) }
-      format.json { render json: @palette }
+      format.json { render json: @palette.colors }
     end
   end
 

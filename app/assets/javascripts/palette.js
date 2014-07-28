@@ -30,6 +30,7 @@
     dropMessage = null;
     colorTemplate = null;
     activePalette = [];
+    var currentPalette;
     colorDrag = function(event) {
       var color, data;
       color = event.target;
@@ -48,22 +49,32 @@
       event.preventDefault();
       return event.dataTransfer.dropEffect = 'copy';
     };
+    var updateTitle = function(number){
+      _.id('activePalette').innerHTML = 'No. '+number
+    }
     var addColor = function(data){
       _.template(colorTemplate, function(template) {
         return insertColor(template, data);
       });
       _.hide(dropMessage);
       activePalette.push(data);
+
       var request = new XMLHttpRequest();
       request.open("POST", "/colors", true);
       request.onreadystatechange = function () {
         if (request.readyState != 4 || request.status != 200) return;
-        data = JSON.parse(request.responseText);
-        history.pushState(null, null, window.location.origin + "/palettes/" + data["id"] + "/edit")
+        var requestData = JSON.parse(request.responseText);
+        history.pushState(null, null, window.location.origin + "/palettes/" + requestData["id"] + "/edit")
+        currentPalette = requestData["id"]
+        updateTitle(requestData["id"])
       };
       request.setRequestHeader('Accept', 'application/json');
       request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-      request.send("color[name]='Yellow'&color[hex]='fff700'&color[mixed]='false'");
+      if (currentPalette != null) {
+        request.send("color[name]="+data.name+"&color[hex]="+data.hex+"&color[mixed]="+data.mixed+"&color[palette_id]="+currentPalette);
+      } else {
+        request.send("color[name]="+data.name+"&color[hex]="+data.hex+"&color[mixed]="+data.mixed);
+      }
     }
     colorDrop = function(event) {
       var data;
@@ -72,6 +83,8 @@
       data.inpalette = "true";
       data.index = activePalette.length;
       data.paletteIndex = 1;
+      data.id = null;
+      // TODO: we actually need to provide the proper id in case the user removes the color right away.
       addColor(data);
     };
     paletteColorDrag = function(event) {
@@ -98,6 +111,20 @@
       var visualColor = paletteColors.children.item(index)
       activePalette.splice(activePalette.length - index - 1, 1);
       visualColor.classList.add('deleted');
+
+      var request = new XMLHttpRequest();
+      request.open("DELETE", "/colors/"+_.attr(visualColor, 'data-id'), true);
+      request.onreadystatechange = function () {
+        if (request.readyState != 4 || request.status != 200) return;
+        var requestData = JSON.parse(request.responseText);
+        history.pushState(null, null, window.location.origin + "/palettes/" + requestData["id"] + "/edit")
+        currentPalette = requestData["id"]
+        updateTitle(requestData["id"])
+      };
+      request.setRequestHeader('Accept', 'application/json');
+      request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+      request.send("color[id]="+_.attr(visualColor, 'data-id'));
+
       setTimeout(function(){
         _.remove(visualColor);
         if (activePalette.length == 0) {
@@ -162,7 +189,33 @@
           // palette = _ref[_i];
           // addPalette(palette.name);
         // }
+        var url = window.location.pathname.split("/")
+        if (url.indexOf('palettes') !== -1) { 
+          _.json('/palettes/'+url[2]+'.json', function(colors){
+            activePalette = colors
+            _.template(colorTemplate, replaceColors);
+          })
+          updateTitle(url[2])
+          currentPalette = url[2]
+        } else {
+          currentPalette = null
+        }
         activePaletteIndex = 0;
+
+        // DETECT BACK/FORWARD BUTTONS
+        // _.listen(window, 'popstate', function(){
+        //   var url = window.location.pathname.split("/")
+        //   if (url.indexOf('palettes') !== -1) { 
+        //     _.json('/palettes/'+url[2]+'.json', function(colors){
+        //       activePalette = colors
+        //       _.template(colorTemplate, replaceColors);
+        //     })
+        //     updateTitle(url[2])
+        //     currentPalette = url[2]
+        //   } else {
+        //     currentPalette = null
+        //   }
+        // })
       }
     }
   });

@@ -459,10 +459,12 @@
 		  checkContrast: checkContrastFunction,
 		  mixed: attribute('data-mixed'),
 		  origin: 'false',
+		  id: null,
 		};
 		if(clickedColor.parentNode.id == "palette_colors"){
 			data.index = _.getElIndex(clickedColor);
-			data.origin = "palette"
+			data.origin = "palette";
+			data.id = _.attr(clickedColor, 'data-id');
 		}
 
 		// if a color is clicked while holding the `alt` key

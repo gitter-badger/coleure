@@ -16,6 +16,7 @@
           color = colors[_i];
           color.mixed = "false";
           color.origin = "library";
+          color.id = null;
           var colorNumber = colors.indexOf(color);
           if (sectionMarkers.indexOf(colorNumber+1) > -1) {
             if (!(colorNumber === 0)) {

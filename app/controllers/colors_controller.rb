@@ -21,6 +21,6 @@ class ColorsController < ApplicationController
   private
 
   def color_params
-    params.require(:color).permit(:palette_id, :name, :hex, :mixed)
+    params.require(:color).permit(:palette_id, :name, :hex, :rgb, :hsl, :mixed)
   end
 end

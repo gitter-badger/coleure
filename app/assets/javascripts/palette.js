@@ -70,11 +70,8 @@
       };
       request.setRequestHeader('Accept', 'application/json');
       request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-      if (currentPalette != null) {
-        request.send("color[name]="+data.name+"&color[hex]="+data.hex+"&color[mixed]="+data.mixed+"&color[palette_id]="+currentPalette);
-      } else {
-        request.send("color[name]="+data.name+"&color[hex]="+data.hex+"&color[mixed]="+data.mixed);
-      }
+      if (currentPalette != null) { data.palette_id = currentPalette }
+      request.send(_.serialize(data, 'color'));
     }
     colorDrop = function(event) {
       var data;
@@ -190,7 +187,7 @@
           // addPalette(palette.name);
         // }
         var url = window.location.pathname.split("/")
-        if (url.indexOf('palettes') !== -1) { 
+        if (url.indexOf('palettes') !== -1) {
           _.json('/palettes/'+url[2]+'.json', function(colors){
             activePalette = colors
             _.template(colorTemplate, replaceColors);
@@ -205,7 +202,7 @@
         // DETECT BACK/FORWARD BUTTONS
         // _.listen(window, 'popstate', function(){
         //   var url = window.location.pathname.split("/")
-        //   if (url.indexOf('palettes') !== -1) { 
+        //   if (url.indexOf('palettes') !== -1) {
         //     _.json('/palettes/'+url[2]+'.json', function(colors){
         //       activePalette = colors
         //       _.template(colorTemplate, replaceColors);

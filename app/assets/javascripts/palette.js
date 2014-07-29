@@ -156,6 +156,19 @@
       color.origin = "palette";
       el.outerHTML = template(color);
     };
+    var setUpPalette = function(){
+      var url = window.location.pathname.split("/")
+      if (url.indexOf('palettes') !== -1) {
+        _.json('/palettes/'+url[2]+'.json', function(colors){
+          activePalette = colors
+          _.template(colorTemplate, replaceColors);
+        })
+        updateTitle(url[2])
+        currentPalette = url[2]
+      } else {
+        currentPalette = null
+      }
+    }
 
     var dropdownVisible = false,
         dropdownAppearanceHandler = function(event) {
@@ -186,33 +199,11 @@
           // palette = _ref[_i];
           // addPalette(palette.name);
         // }
-        var url = window.location.pathname.split("/")
-        if (url.indexOf('palettes') !== -1) {
-          _.json('/palettes/'+url[2]+'.json', function(colors){
-            activePalette = colors
-            _.template(colorTemplate, replaceColors);
-          })
-          updateTitle(url[2])
-          currentPalette = url[2]
-        } else {
-          currentPalette = null
-        }
+
+        setUpPalette();
         activePaletteIndex = 0;
 
-        // DETECT BACK/FORWARD BUTTONS
-        // _.listen(window, 'popstate', function(){
-        //   var url = window.location.pathname.split("/")
-        //   if (url.indexOf('palettes') !== -1) {
-        //     _.json('/palettes/'+url[2]+'.json', function(colors){
-        //       activePalette = colors
-        //       _.template(colorTemplate, replaceColors);
-        //     })
-        //     updateTitle(url[2])
-        //     currentPalette = url[2]
-        //   } else {
-        //     currentPalette = null
-        //   }
-        // })
+        _.listen(window, 'popstate', setUpPalette);
       }
     }
   });

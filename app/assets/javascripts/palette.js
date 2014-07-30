@@ -53,14 +53,6 @@
       _.id('activePalette').innerHTML = 'No. '+number
     }
     var addColor = function(data){
-      _.template(colorTemplate, function(template) {
-        return insertColor(template, data);
-      });
-      _.hide(dropMessage);
-      activePalette.push(data);
-
-      console.log(data.index)
-
       var request = new XMLHttpRequest();
       request.open("POST", "/colors", true);
       request.onreadystatechange = function () {
@@ -69,11 +61,20 @@
         history.pushState(null, null, window.location.origin + "/palettes/" + requestData["id"] + "/edit")
         currentPalette = requestData["id"]
         updateTitle(requestData["id"])
+        _.json('/palettes/'+requestData["id"]+'.json', function(colors){
+          data.id = colors[colors.length-1].id
+        })
       };
       request.setRequestHeader('Accept', 'application/json');
       request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
       if (currentPalette != null) { data.palette_id = currentPalette }
       request.send(_.serialize(data, 'color'));
+
+      _.template(colorTemplate, function(template) {
+        return insertColor(template, data);
+      });
+      _.hide(dropMessage);
+      activePalette.push(data);
     }
     colorDrop = function(event) {
       var data;

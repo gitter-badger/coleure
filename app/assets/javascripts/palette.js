@@ -59,6 +59,8 @@
       _.hide(dropMessage);
       activePalette.push(data);
 
+      console.log(data.index)
+
       var request = new XMLHttpRequest();
       request.open("POST", "/colors", true);
       request.onreadystatechange = function () {

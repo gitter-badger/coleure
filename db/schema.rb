@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140729191859) do
+ActiveRecord::Schema.define(version: 20140730004950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20140729191859) do
     t.integer  "palette_id"
     t.string   "rgb"
     t.string   "hsl"
+    t.integer  "position"
   end
 
   add_index "colors", ["palette_id"], name: "index_colors_on_palette_id", using: :btree

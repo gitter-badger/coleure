@@ -79,7 +79,6 @@
       var data;
       event.preventDefault();
       data = JSON.parse(event.dataTransfer.getData('text'));
-      data.inpalette = "true";
       data.index = activePalette.length;
       data.paletteIndex = 1;
       data.id = null;

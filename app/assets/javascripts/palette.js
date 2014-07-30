@@ -80,7 +80,6 @@
       event.preventDefault();
       data = JSON.parse(event.dataTransfer.getData('text'));
       data.index = activePalette.length;
-      data.paletteIndex = 1;
       data.id = null;
       // TODO: we actually need to provide the proper id in case the user removes the color right away.
       addColor(data);
@@ -141,7 +140,6 @@
           color.mixed = 'false';
         }
         color.index = _i;
-        color.paletteIndex = settings.activePaletteIndex;
         insertColor(template, color);
       }
       if (paletteColors.children.length) {
@@ -181,7 +179,7 @@
       addColor: addColor,
       removeColor: removeColor,
       setup: function(options) {
-        var activePaletteIndex, dropzone, newPaletteField, palette, _i, _len, _ref;
+        var dropzone, newPaletteField, palette, _i, _len, _ref;
         dropzone = _.id('palette');
         _.listen(dropzone, 'dragenter', colorOver);
         _.listen(dropzone, 'dragover', colorOver);
@@ -195,14 +193,8 @@
         _.listen(_.id('colors'), 'drop', paletteColorDrop);
         dropMessage = _.id('drop-message');
         colorTemplate = options.template;
-        _ref = settings.palettes;
-        // for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          // palette = _ref[_i];
-          // addPalette(palette.name);
-        // }
 
         setUpPalette();
-        activePaletteIndex = 0;
 
         _.listen(window, 'popstate', setUpPalette);
       }

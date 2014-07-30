@@ -9,14 +9,7 @@
       return data = JSON.parse(dataString);
     }
     return data = {
-      format: 'hex',
-      activePaletteIndex: 0,
-      palettes: [
-        {
-          name: 'Default',
-          colors: []
-        }
-      ]
+      format: 'hex'
     };
   });
 

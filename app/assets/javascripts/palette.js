@@ -63,7 +63,7 @@
         updateTitle(requestData["id"])
         _.json('/palettes/'+requestData["id"]+'.json', function(colors){
           data.id = colors[colors.length-1].id
-          // _.attr(paletteColors.children.item(0), 'data-id', data.id)
+          _.attr(paletteColors.children.item(0), 'data-id', data.id)
         })
       };
       request.setRequestHeader('Accept', 'application/json');

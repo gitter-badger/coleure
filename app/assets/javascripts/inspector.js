@@ -81,7 +81,7 @@
 			_.attr(selectMix, 'data-hex', hex);
 			_.attr(selectMix, 'data-rgb', rgb);
 			_.attr(selectMix, 'data-hsl', hsl);
-			_.attr(selectMix, 'data-mixed', 'true');
+			_.attr(selectMix, 'data-mixed', true);
 
 			_.id('mixWeightA').innerHTML = (weight*100).toFixed()+"%";
 			Color('#'+subject1.hex).light() ? _.id('mixWeightA').style.color = "#232323" : _.id('mixWeightA').style.color = "#fff";

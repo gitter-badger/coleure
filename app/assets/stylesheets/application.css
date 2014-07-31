@@ -773,6 +773,30 @@ input[type=range]::-webkit-slider-thumb {
 	height: 25px;
 }
 
+/* Modal */
+.modal {
+	background: #fff;
+	position: absolute;
+	top: 0; left: 0; right: 0;
+	z-index: 9999;
+	padding: 30px;
+	font-size: 20px;
+}
+.modal .close {
+	position: absolute;
+	top: 0; right: 0;
+}
+.modal strong {
+	text-transform: uppercase;
+	font-size: 0.75em;
+}
+.modal p {
+	margin-bottom: 20px;
+}
+.modal p + p {
+	margin-bottom: 0;
+}
+
 /* Animations */
 @-webkit-keyframes scalemation {
 	0%   { height: 0px; }

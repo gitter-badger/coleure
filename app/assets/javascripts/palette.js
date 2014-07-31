@@ -62,9 +62,9 @@
         currentPalette = requestData["id"]
         updateTitle(requestData["id"])
         _.json('/palettes/'+requestData["id"]+'.json', function(colors){
-          data.id = colors[colors.length-1].id
-          _.attr(paletteColors.children.item(0), 'data-id', data.id)
-        })
+          data.id = colors[colors.length-1].id;
+          _.attr(paletteColors.children.item(0), 'data-id', data.id);
+        });
       };
       request.setRequestHeader('Accept', 'application/json');
       request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
@@ -139,7 +139,7 @@
       for (_i = 0, _len = activePalette.length; _i < _len; _i++) {
         color = activePalette[_i];
         if (!color.mixed) {
-          color.mixed = 'false';
+          color.mixed = false;
         }
         color.index = _i;
         insertColor(template, color);

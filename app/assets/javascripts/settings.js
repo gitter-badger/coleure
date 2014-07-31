@@ -9,7 +9,8 @@
       return data = JSON.parse(dataString);
     }
     return data = {
-      format: 'hex'
+      format: 'hex',
+      upgradeNotice: true
     };
   });
 

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>All Palettes</title>
+    <link rel="stylesheet" href="//cloud.typography.com/6394892/653404/css/fonts.css" />
+    <link id="dynamic-favicon" rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <style>
+      * {
+        margin:0;
+        padding:0;
+        border:0;
+        font-size:100%;
+        vertical-align:baseline;
+      }
+      body {
+        width: 60%;
+        margin: 100px auto;
+        font: 18px/1.5 "Gotham A", "Gotham B", "Gotham HTF", Futura, sans-serif;
+        color: #fff;
+        background: #232323;
+      }
+      img {
+        max-width: 100%;
+        margin-bottom: 2em;
+      }
+      a {
+        text-decoration: none;
+        color: #fff;
+      }
+      a.button {
+        display: inline-block;
+        margin-top: 0.5em;
+        padding: 0.5em 1em;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 18px;
+        color: #232323;
+        background: #fff;
+      }
+      a.button:hover {
+        background: #111;
+        color: #fff;
+      }
+      h1 {
+      	margin-bottom: 0.25em;
+		font-size: 48px;
+      }
+      h2 {
+        font-size: 16px;
+      }
+      .palette {
+		display: block;
+		overflow: hidden;
+		padding-bottom: 15px;
+		border-top: 2px solid #444;
+      }
+      .palette:hover {
+      	background: #444;
+      }
+      .color {
+      	 width: 6.25%;
+      	 padding-bottom: 6.25%;
+      	 float: left;
+      }
+      .columns {
+      	margin-bottom: 2em;
+        -webkit-columns: 4;
+        -moz-columns: 4;
+        -o-columns: 4;
+        columns: 4;
+      }
+    </style>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-35016870-5', 'coleure.com');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body>
+  	<h1>Palettes</h1>
+  	<div class="columns">
+		<% @palettes.each do |palette| %>
+			<a class="palette" href="/palettes/<%= palette.id %>/edit">
+				<h2>No. <%= palette.id %></h2>
+				<% palette.colors.each do |color| %>
+					<span class="color" style="background: #<%= color.hex %>;"></span>
+				<% end %>
+			</a>
+		<% end %>
+  	</div>
+    <a href="/" class="button">Go back to Coleure</a>
+  </body>
+</html>

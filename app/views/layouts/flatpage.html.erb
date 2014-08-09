@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= yield(:title) %></title>
+    <%= stylesheet_link_tag 'flatpage', media: 'all' %>
+    <link rel="stylesheet" href="//cloud.typography.com/6394892/653404/css/fonts.css" />
+    <link id="dynamic-favicon" rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <%= csrf_meta_tags %>
+    <%= render "layouts/analytics" %>
+  </head>
+  <body>
+    <%= yield %>
+  </body>
+</html>

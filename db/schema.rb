@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20140811210619) do
     t.integer  "palette_id"
     t.string   "rgb"
     t.string   "hsl"
+    t.integer  "position"
   end
 
   add_index "colors", ["palette_id"], name: "index_colors_on_palette_id", using: :btree

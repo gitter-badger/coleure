@@ -25,16 +25,13 @@
 </h1>
 <section id="palette">
   <div id="drop-message" class="dropzone">
-    <i class="sample item color"></i>
-    <i class="sample item color"></i>
-    <i class="sample item color"></i>
-    <i class="sample item color"></i>
-    <p><i class="drop"></i>Drop your favorite<br>colors here.</p>
+    <div class="content">
+      <p><i class="drop"></i><br>Drop your favorite<br>colors here.</p>
+      <hr>
+      <p><a href="/about" id="learnMoreLink">Learn more</a> about <br>the project.</p>
+    </div>
   </div>
   <div id="palette_colors" class="clear b10"></div>
-  <div class="project-info">
-    <p>Made by <a href="http://rolandomurillo.com/">Rolando Murillo</a> and <a href="http://goddamnhippie.com/">Gustavo Beathyate</a>.
-  </div>
   <header class="select">
     <h1 class="subtitle">
       <span id="activePalette" class="active-palette">New</span>
@@ -103,3 +100,9 @@
 <section id="library">
   <div id="colors"></div>
 </section>
+<aside class="modal" id="upgradeNotice" style="display:none;">
+  <p>
+    <strong>New version</strong> You can now access and share your palettes online. Try it out, create a new palette.<br>Sorry for any palette lost, this is exactly why we worked on this new version.
+  </p>
+  <p><button id="upgradeNoticeButton" class="secondary">Got it</button></p>
+</aside>

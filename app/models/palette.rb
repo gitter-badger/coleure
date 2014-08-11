@@ -1,5 +1,5 @@
 class Palette < ActiveRecord::Base
-	has_many :colors
+	has_many :colors, -> { order("position ASC") }
 
 	def self.with_color(params)
 		old_palette = find(params[:palette_id]) if params[:palette_id]

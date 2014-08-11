@@ -34,7 +34,7 @@
 	var removeColor = function(event) {
 	  var closeButton, preview;
 	  closeButton = event.target;
-	  
+
 	  // making sure the close button contains the class 'close'
 	  if (!closeButton.classList.contains('close')) {
 		return;
@@ -81,7 +81,7 @@
 			_.attr(selectMix, 'data-hex', hex);
 			_.attr(selectMix, 'data-rgb', rgb);
 			_.attr(selectMix, 'data-hsl', hsl);
-			_.attr(selectMix, 'data-mixed', 'true');
+			_.attr(selectMix, 'data-mixed', true);
 
 			_.id('mixWeightA').innerHTML = (weight*100).toFixed()+"%";
 			Color('#'+subject1.hex).light() ? _.id('mixWeightA').style.color = "#232323" : _.id('mixWeightA').style.color = "#fff";
@@ -105,18 +105,18 @@
 				_.hide(mixResult);
 				_.hide(mixControls);
 				_.show(mixButton);
-				_.attr(mixButton, 'class', 'not-active'); 
+				_.attr(mixButton, 'class', 'not-active');
 				if (subjectsCount < 2) {
 					_.hide(panel)
 				};
 				if (removeColorButton != true) {
-					mixMode.exit(); 
+					mixMode.exit();
 				}
 			},
 			setup: function(){
 				if (subjectsCount === 2){
 					setMixResult(_.id('mixBalance').value);
-					_.show(panel); 
+					_.show(panel);
 					_.id('mixBalance').style.backgroundImage = ['linear-gradient(to right, #',subject1.hex,', #', subject2.hex,')'].join('');
 				} else {
 					this.exit();
@@ -224,12 +224,13 @@
 
 			_.id('colorSaturationValue').value = colorHSL[1];
 			_.id('colorSaturationRange').value = colorHSL[1];
-			
+
 			_.id('colorLightValue').value = colorHSL[2];
 			_.id('colorLightRange').value = colorHSL[2];
 		};
 		var updateTemplates = function(){
 			data.mixed = 'false';
+			data.id = null;
 			_.remove(color_previews[0]);
 			_.template(options.previewTemplate, changePreview);
 			_.template(options.singleTemplate, changeTests);
@@ -264,11 +265,11 @@
 			data = {
 				hex: hexValue,
 				hsl: [
-					Color('#'+data.hex).values.hsl[0], ', ', 
+					Color('#'+data.hex).values.hsl[0], ', ',
 					Color('#'+data.hex).values.hsl[1], '%, ',
 					Color('#'+data.hex).values.hsl[2], '%'].join(''),
 				rgb: [
-					Color('#'+data.hex).values.rgb[0], ', ', 
+					Color('#'+data.hex).values.rgb[0], ', ',
 					Color('#'+data.hex).values.rgb[1], ', ',
 					Color('#'+data.hex).values.rgb[2]].join(''),
 				origin: "inspector",
@@ -374,7 +375,7 @@
 				updateTemplates();
 
 			},
-			
+
 			onSaturationRangeChange: function(){
 				var hexValue = Color({h: _.id('colorHueRange').value, s: _.id('colorSaturationRange').value, l: _.id('colorLightRange').value}).hexString().substring(1).toLowerCase();
 				updateData(hexValue);
@@ -384,16 +385,16 @@
 				updateGradients.hue(Color('#'+data.hex).values.hsl);
 				updateGradients.light(Color('#'+data.hex).values.hsl);
 				updateTemplates();
-				
+
 			},
-			
+
 			onLightRangeChange: function(){
 				var hexValue = Color({h: _.id('colorHueRange').value, s: _.id('colorSaturationRange').value, l: _.id('colorLightRange').value}).hexString().substring(1).toLowerCase();
 				updateData(hexValue);
 				_.id('colorCode').value = hexValue;
 				_.id('colorLightValue').value = _.id('colorLightRange').value;
 
-				
+
 				updateGradients.hue(Color('#'+data.hex).values.hsl);
 				updateGradients.saturation(Color('#'+data.hex).values.hsl);
 				updateTemplates();
@@ -477,7 +478,7 @@
 		  // TODO: figure this out
 		  data.firstHex = _.attr(color_previews[0], 'data-hex');
 		  data.firstName = _.attr(color_previews[0], 'data-name');
-		  
+
 		  // assigning subject1 and subject2 values to the common scope variables
 		  subject1 = { name: data.firstName, hex: data.firstHex };
 		  subject2 = { name: data.name, hex: data.hex };
@@ -518,9 +519,9 @@
 		color_subjects = _.id('subjects');
 
 		var selectColor = this.selectColor;
-		
+
 		_.listen(_.id('colors'), 'click', this.selectColor);
-		_.listen(_.id('palette_colors'), 'click', this.selectColor); 
+		_.listen(_.id('palette_colors'), 'click', this.selectColor);
 
 		editPanel.exit();
 		_.listen(_.id('subjects'), 'click', removeColor);

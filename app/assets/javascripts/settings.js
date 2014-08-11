@@ -10,13 +10,7 @@
     }
     return data = {
       format: 'hex',
-      activePaletteIndex: 0,
-      palettes: [
-        {
-          name: 'Default',
-          colors: []
-        }
-      ]
+      upgradeNotice: true
     };
   });
 

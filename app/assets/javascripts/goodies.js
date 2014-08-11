@@ -225,12 +225,23 @@
         }
         return el.style.display = type;
       },
-      getElIndex: function(el){ 
+      getElIndex: function(el){
         var nodes = el.parentNode.childNodes, node;
         var i = count = 0;
         while( (node=nodes.item(i++)) && node!=el )
             if( node.nodeType==1 ) count++;
         return count;
+      },
+      serialize: function(obj, prefix){
+        // from http://stackoverflow.com/questions/1714786/querystring-encoding-of-a-javascript-object
+        var str = [];
+        for(var p in obj) {
+          var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
+          str.push(typeof v == "object" ?
+            this.serialize(v, k) :
+            encodeURIComponent(k) + "=" + encodeURIComponent(v));
+        }
+        return str.join("&");
       },
       templateList: function(urls, callback, scopes, compileOnly) {
         var compiled, contents, i, listCallback, url, _results;

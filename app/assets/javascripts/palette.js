@@ -123,6 +123,7 @@
       };
       request.setRequestHeader('Accept', 'application/json');
       request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+      request.setRequestHeader('X-CSRF-Token', getAuthToken());
       request.send("color[id]="+_.attr(visualColor, 'data-id'));
 
       setTimeout(function(){

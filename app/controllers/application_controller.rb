@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Guachiman::Authorizable
+
   protect_from_forgery with: :exception
 
   def current_user

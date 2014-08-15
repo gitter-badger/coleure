@@ -1,7 +1,7 @@
 class Palette < ActiveRecord::Base
 	belongs_to :user
 
-	belongs_to :parent,   class_name: self, foreign_key: :parent_id, counter_cache: true
+	belongs_to :parent,   class_name: self, foreign_key: :parent_id, counter_cache: :children_count
 	has_many   :children, class_name: self, foreign_key: :parent_id, dependent: :destroy
 
 	has_many :colors, -> { order("position ASC") }

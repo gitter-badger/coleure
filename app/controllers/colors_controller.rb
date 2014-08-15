@@ -1,6 +1,6 @@
 class ColorsController < ApplicationController
   def create
-    @palette = Palette.with_color(color_params)
+    @palette = Palette.with_color color_params.merge(user_id: current_user.try(:id))
 
     respond_to do |format|
       format.html { redirect_to edit_palette_path(@palette) }

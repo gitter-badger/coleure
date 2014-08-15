@@ -1,15 +1,20 @@
 class Palette < ActiveRecord::Base
+	belongs_to :user
+
 	has_many :colors, -> { order("position ASC") }
 
 	def self.with_color(params)
 		old_palette = find(params[:palette_id]) if params[:palette_id]
-		new_palette = create
+		new_palette = create user_id: params.delete(:user_id)
 
 		if old_palette
-			old_palette.colors.each { |c| new_palette.colors.create(name: c.name, hex: c.hex, rgb: c.rgb, hsl: c.hsl, mixed: c.mixed) }
+			old_palette.colors.each do |c|
+				new_palette.colors.create(name: c.name, hex: c.hex, rgb: c.rgb, hsl: c.hsl, mixed: c.mixed)
+			end
 		end
 
-		new_palette.colors.create(name: params[:name], hex: params[:hex], rgb: params[:rgb], hsl: params[:hsl], mixed: params[:mixed])
+		new_palette.colors.create(name: params[:name], hex: params[:hex], rgb: params[:rgb],
+															hsl: params[:hsl], mixed: params[:mixed])
 
 		new_palette
 	end
@@ -17,7 +22,9 @@ class Palette < ActiveRecord::Base
 	def without_color(hex)
 		new_palette = self.class.create
 
-		colors.each { |c| new_palette.colors.create(name: c.name, hex: c.hex, rgb: c.rgb, hsl: c.hsl, mixed: c.mixed) unless c.hex == hex }
+		colors.each do |c|
+			new_palette.colors.create(name: c.name, hex: c.hex, rgb: c.rgb, hsl: c.hsl, mixed: c.mixed) unless c.hex == hex
+		end
 
 		new_palette
 	end

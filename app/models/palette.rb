@@ -1,11 +1,17 @@
 class Palette < ActiveRecord::Base
 	belongs_to :user
 
+	belongs_to :parent,   class_name: self, foreign_key: :parent_id
+	has_many   :children, class_name: self, foreign_key: :parent_id, dependent: :destroy
+
 	has_many :colors, -> { order("position ASC") }
+
+	scope :children_of, -> (parent) { where parent_id: parent.id }
+	scope :without_children, -> { where "(SELECT COUNT(*) FROM palettes p WHERE p.parent_id = id) = 0" }
 
 	def self.with_color(params)
 		old_palette = find(params[:palette_id]) if params[:palette_id]
-		new_palette = create user_id: params.delete(:user_id)
+		new_palette = create user_id: params.delete(:user_id), parent_id: old_palette.try(:id)
 
 		if old_palette
 			old_palette.colors.each do |c|

@@ -99,15 +99,15 @@
 </aside>
 <section id="library">
   <nav id="user_menu">
-    <a id="userMenuNewPaletteButton" class="block-button active">New Palette</a>
-    <a id="userMenuEditorButton" class="block-button active" style="display: none;">Editor</a>
+    <a id="userMenuNewPaletteButton" class="block-button active"><i class="menu-plus"></i><br>New Palette</a>
+    <a id="userMenuEditorButton" class="block-button active" style="display: none;"><i class="menu-panel"></i><br>Editor</a>
     <% if current_user %>
-      <a class="block-button" href="/users/<%= current_user.id %>">My Palettes</a>
-      <a class="block-button" href="#">Settings</a>
-      <a class="block-button" href="/logout">Logout</a>
+      <a class="block-button" href="/users/<%= current_user.id %>"><i class="menu-palettes"></i><br>My Palettes</a>
+      <a class="block-button" href="#"><i class="menu-settings"></i><br>Settings</a>
+      <a class="block-button" href="/logout"><i class="menu-exit"></i><br>Logout</a>
     <% else %>
-      <a class="block-button" href="/login">Login</a>
-      <a class="block-button" href="/users/new">Sign up<br><span id="appPrice" class="price">$10/yr</span></a>
+      <a class="block-button" href="/login"><i class="menu-lock"></i><br>Login</a>
+      <a class="block-button" href="/users/new"><i class="menu-user"></i><br>Sign Up<br><span id="appPrice" class="price">$10/yr</span></a>
     <% end %>
   </nav>
   <div id="colors"></div>

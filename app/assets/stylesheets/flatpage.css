@@ -51,6 +51,11 @@ label {
   font-weight: bold;
   font-size: 14px;
 }
+.field_with_errors label {
+  /* TODO: Change this */
+  background-color: red;
+}
+
 input[type=text], input[type=email],
 input[type=password] {
   padding: 10px;

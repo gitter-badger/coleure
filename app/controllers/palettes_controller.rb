@@ -1,5 +1,4 @@
 class PalettesController < ApplicationController
-  before_action :set_palette, only: [:show, :edit]
 
   def new;  end
   def edit; end
@@ -23,7 +22,7 @@ class PalettesController < ApplicationController
 
   private
 
-  def set_palette
-    @palette = Palette.find(params[:id])
+  def current_resource
+    @palette = Palette.find(params[:id]) if params[:id].present?
   end
 end

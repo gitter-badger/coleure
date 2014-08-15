@@ -21,7 +21,7 @@ private
   def user_authorization
     guest_authorization
 
-    allow :users, %i[new create] do |user|
+    allow :users, %i[show edit update] do |user|
       @current_user.id == user.id
     end
   end

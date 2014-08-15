@@ -6,26 +6,6 @@ class Palette < ActiveRecord::Base
 
 	has_many :colors, -> { order("position ASC") }
 
-	def leafs
-		sql = "
-			WITH RECURSIVE parent_palettes(id, children_count) AS (
-				SELECT p.id, 0
-				FROM 	 palettes p
-				WHERE  p.id = ?
-			UNION ALL
-				SELECT p.id, pp.children_count + 1
-				FROM   palettes p, parent_palettes pp
-				WHERE  p.parent_id = pp.id
-			)
-
-			SELECT id
-			FROM   parent_palettes
-			WHERE  children_count = 0
-		"
-
-		self.class.where "id IN (#{ sql })", id
-	end
-
 	def self.with_color(params)
 		old_palette = find(params[:palette_id]) if params[:palette_id]
 		new_palette = create user_id: params.delete(:user_id), parent_id: old_palette.try(:id)

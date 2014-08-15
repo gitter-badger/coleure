@@ -10,12 +10,12 @@ class User < ActiveRecord::Base
 
   def leaf_palettes
     sql = "
-      WITH RECURSIVE parent_palettes(id, children_count) AS (
-        SELECT p.id, 0
+      WITH RECURSIVE parent_palettes(id, user_id, children_count) AS (
+        SELECT p.id, p.user_id, 0
         FROM   palettes p
-        WHERE  p.user_id = ?
+        WHERE  p.parent_id IS NULL
       UNION ALL
-        SELECT p.id, pp.children_count + 1
+        SELECT p.id, p.user_id, pp.children_count + 1
         FROM   palettes p, parent_palettes pp
         WHERE  p.parent_id = pp.id
       )
@@ -23,8 +23,9 @@ class User < ActiveRecord::Base
       SELECT id
       FROM   parent_palettes
       WHERE  children_count = 0
+      AND    user_id = ?
     "
 
-    Palette.where "id IN (#{ sql })", id
+    palettes.where "id IN (#{ sql })", id
   end
 end

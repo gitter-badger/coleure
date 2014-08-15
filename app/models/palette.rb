@@ -6,9 +6,6 @@ class Palette < ActiveRecord::Base
 
 	has_many :colors, -> { order("position ASC") }
 
-	scope :children_of, -> (parent) { where parent_id: parent.id }
-	scope :without_children, -> { where "(SELECT COUNT(*) FROM palettes p WHERE p.parent_id = id) = 0" }
-
 	def self.with_color(params)
 		old_palette = find(params[:palette_id]) if params[:palette_id]
 		new_palette = create user_id: params.delete(:user_id), parent_id: old_palette.try(:id)

@@ -9,8 +9,8 @@ class ColorsController < ApplicationController
   end
 
   def destroy
-    @color   = Color.find(params[:id], current_user.try(:id))
-    @palette = @color.palette.without_color(@color.hex)
+    @color   = Color.find(params[:id])
+    @palette = @color.palette.without_color(@color.hex, current_user.try(:id))
 
     respond_to do |format|
       format.html { redirect_to edit_palette_path(@palette) }

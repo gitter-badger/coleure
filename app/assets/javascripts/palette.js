@@ -40,7 +40,7 @@
         hex: _.attr(color, 'data-hex'),
         rgb: _.attr(color, 'data-rgb'),
         hsl: _.attr(color, 'data-hsl'),
-        mixed: _.attr(color, 'data-mixed')
+        mixed: _.attr(color, 'data-mixed'),
       };
       event.dataTransfer.effectAllowed = 'copy';
       return event.dataTransfer.setData('text', JSON.stringify(data));
@@ -68,6 +68,7 @@
       };
       request.setRequestHeader('Accept', 'application/json');
       request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+      request.setRequestHeader('X-CSRF-Token', getAuthToken());
       if (currentPalette != null) { data.palette_id = currentPalette }
       request.send(_.serialize(data, 'color'));
 
@@ -122,6 +123,7 @@
       };
       request.setRequestHeader('Accept', 'application/json');
       request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+      request.setRequestHeader('X-CSRF-Token', getAuthToken());
       request.send("color[id]="+_.attr(visualColor, 'data-id'));
 
       setTimeout(function(){

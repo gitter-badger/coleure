@@ -9,7 +9,7 @@ class ColorsController < ApplicationController
   end
 
   def destroy
-    @color   = Color.find(params[:id])
+    @color   = Color.find(params[:id], current_user.try(:id))
     @palette = @color.palette.without_color(@color.hex)
 
     respond_to do |format|

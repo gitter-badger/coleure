@@ -24,8 +24,8 @@ class Palette < ActiveRecord::Base
 		new_palette
 	end
 
-	def without_color(hex)
-		new_palette = self.class.create
+	def without_color(hex, new_user_id = nil)
+		new_palette = self.class.create parent_id: id, user_id: new_user_id
 
 		colors.each do |c|
 			new_palette.colors.create(name: c.name, hex: c.hex, rgb: c.rgb, hsl: c.hsl, mixed: c.mixed) unless c.hex == hex

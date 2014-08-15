@@ -13,7 +13,7 @@ private
 
   def guest_authorization
     allow :sessions, %i[new create destroy]
-    allow :palettes, %i[index new, create show edit]
+    allow :palettes, %i[index new create show edit]
     allow :colors,   %i[create destroy]
     allow :users,    %i[new create]
   end

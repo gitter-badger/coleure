@@ -50,7 +50,7 @@
       return event.dataTransfer.dropEffect = 'copy';
     };
     var updateTitle = function(number){
-      _.id('activePalette').innerHTML = 'No. '+number
+      _.id('activePalette').innerHTML = number? 'No. '+number : 'New';
     }
     var addColor = function(data){
       var request = new XMLHttpRequest();
@@ -77,6 +77,7 @@
       });
       _.hide(dropMessage);
       activePalette.push(data);
+      updatePaletteButtons();
     }
     colorDrop = function(event) {
       var data;
@@ -107,6 +108,15 @@
         removeColor(index);
       }
     };
+    var updatePaletteButtons = function(){
+      if (activePalette.length != 0){
+        _.id('userMenuNewPaletteButton').classList.remove('active');
+        _.id('userMenuEditorButton').classList.add('active');
+      } else {
+        _.id('userMenuNewPaletteButton').classList.add('active');
+        _.id('userMenuEditorButton').classList.remove('active');
+      }
+    };
     var removeColor = function(index){
       var visualColor = paletteColors.children.item(index)
       activePalette.splice(activePalette.length - index - 1, 1);
@@ -132,6 +142,8 @@
           _.show(dropMessage)
         }
       }, 200)
+
+      updatePaletteButtons();
     }
     replaceColors = function(template) {
       var color, _i, _len;
@@ -165,11 +177,16 @@
         _.json('/palettes/'+url[2]+'.json', function(colors){
           activePalette = colors
           _.template(colorTemplate, replaceColors);
+          updatePaletteButtons();
         })
         updateTitle(url[2])
         currentPalette = url[2]
       } else {
-        currentPalette = null
+        activePalette = [];
+        _.template(colorTemplate, replaceColors);
+        updateTitle();
+        currentPalette = null;
+        updatePaletteButtons();
       }
     }
 
@@ -195,6 +212,7 @@
         _.listen(_.id('colors'), 'dragenter', paletteColorOver);
         _.listen(_.id('colors'), 'dragover', paletteColorOver);
         _.listen(_.id('colors'), 'drop', paletteColorDrop);
+        _.listen(_.id('userMenuNewPaletteButton'), 'mousedown', function(){history.pushState(null, null, window.location.origin); setUpPalette();});
         dropMessage = _.id('drop-message');
         colorTemplate = options.template;
 

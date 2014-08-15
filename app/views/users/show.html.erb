@@ -1,1 +1,45 @@
-<%= @user.inspect %>
+<h1>My Palettes</h1>
+<div class="columns">
+<% @user.palettes.each do |palette| %>
+  <a class="palette" href="/palettes/<%= palette.id %>/edit">
+    <h2>No. <%= palette.id %></h2>
+    <% palette.colors.each do |color| %>
+      <span class="color" style="background: #<%= color.hex %>;"></span>
+    <% end %>
+  </a>
+<% end %>
+</div>
+<a href="/" class="button">Go back to Coleure</a>
+
+<style>
+  h2 {
+    font-size: 16px;
+  }
+  .palette {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 15px;
+    border-top: 2px solid #eee;
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside: avoid;
+    -o-column-break-inside: avoid;
+    column-break-inside: avoid;
+    page-break-inside: avoid
+  }
+  .palette:hover {
+    background: #eee;
+  }
+  .color {
+    width: 6.25%;
+    padding-bottom: 6.25%;
+    float: left;
+  }
+  .columns {
+  	margin-top: 1em;
+    margin-bottom: 2em;
+    -webkit-columns: 4;
+    -moz-columns: 4;
+    -o-columns: 4;
+    columns: 4;
+  }
+</style>

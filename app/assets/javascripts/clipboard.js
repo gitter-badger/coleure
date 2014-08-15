@@ -12,8 +12,10 @@
       _.attr(clipboard_handler, 'data-hsl', _.attr(color, 'data-hsl'));
       clipboard_handler.value = _.id('current_color_code').innerHTML = _.attr(color, "data-" + settings.format);
       format_status.style.backgroundColor = '#'+_.attr(color, "data-hex");
+      _.id('appPrice').style.backgroundColor = '#'+_.attr(color, "data-hex");
       _.id('learnMoreLink').style.color = '#'+_.attr(color, "data-hex");
       Color('#'+_.attr(color, "data-hex")).light() ? format_status.style.color = "#232323" :format_status.style.color = "#fff";
+      Color('#'+_.attr(color, "data-hex")).light() ? _.id('appPrice').style.color = "#232323" :_.id('appPrice').style.color = "#fff";
       Color('#'+_.attr(color, "data-hex")).light() ? _.attr(_.id('settingsIcon'), 'fill', '#232323') : _.attr(_.id('settingsIcon'), 'fill', '#fff');
       return clipboard_handler.select();
     };

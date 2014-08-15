@@ -11,4 +11,3 @@
 // about supported directives.
 //
 //= require color.min
-//= require vminpoly.min

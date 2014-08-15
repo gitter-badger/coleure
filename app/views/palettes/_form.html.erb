@@ -98,6 +98,18 @@
   </div>
 </aside>
 <section id="library">
+  <nav id="user_menu">
+    <a id="userMenuNewPaletteButton" class="block-button active">New Palette</a>
+    <a id="userMenuEditorButton" class="block-button disabled">Editor</a>
+    <% if current_user %>
+      <a class="block-button" href="/users/<%= current_user.id %>">My Palettes</a>
+      <a class="block-button" href="#">Settings</a>
+      <a class="block-button" href="/logout">Logout</a>
+    <% else %>
+      <a class="block-button" href="/login">Login</a>
+      <a class="block-button" href="/users/new">Sign up<br><span id="appPrice" class="price">$10/yr</span></a>
+    <% end %>
+  </nav>
   <div id="colors"></div>
 </section>
 <aside class="modal" id="upgradeNotice" style="display:none;">

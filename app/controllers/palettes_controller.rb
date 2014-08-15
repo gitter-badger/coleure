@@ -9,6 +9,11 @@ class PalettesController < ApplicationController
     render layout: false
   end
 
+  def user
+    @user = current_user
+    render layout: false
+  end
+
   def show
     respond_to do |format|
       format.html { redirect_to edit_palette_path(@palette) }

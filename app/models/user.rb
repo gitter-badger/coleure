@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
       WITH RECURSIVE parent_palettes(id, children_count) AS (
         SELECT p.id, 0
         FROM   palettes p
-        AND    p.user_id = ?
+        WHERE  p.user_id = ?
       UNION ALL
         SELECT p.id, pp.children_count + 1
         FROM   palettes p, parent_palettes pp

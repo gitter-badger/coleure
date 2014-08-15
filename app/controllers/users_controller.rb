@@ -2,8 +2,6 @@ class UsersController < ApplicationController
 
   layout "flatpage"
 
-  before_action :set_user
-
   def new
   end
 
@@ -39,5 +37,9 @@ private
 
   def user_params
     params.require(:user).permit :name, :email, :password
+  end
+
+  def current_resource
+    @user ||= params[:id].present? ? User.find(params[:id]) : User.new
   end
 end

@@ -1,6 +1,7 @@
+<% content_for :title, "My Palettes - Coleure" %>
 <h1>My Palettes</h1>
 <div class="columns">
-<% @user.leaf_palettes.each do |palette| %>
+<% @user.palettes.leafs do |palette| %>
   <a class="palette" href="/palettes/<%= palette.id %>/edit">
     <h2>No. <%= palette.id %></h2>
     <% palette.colors.each do |color| %>

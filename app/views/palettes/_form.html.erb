@@ -100,7 +100,7 @@
 <section id="library">
   <nav id="user_menu">
     <a id="userMenuNewPaletteButton" class="block-button active">New Palette</a>
-    <a id="userMenuEditorButton" class="block-button disabled">Editor</a>
+    <a id="userMenuEditorButton" class="block-button active" style="display: none;">Editor</a>
     <% if current_user %>
       <a class="block-button" href="/users/<%= current_user.id %>">My Palettes</a>
       <a class="block-button" href="#">Settings</a>

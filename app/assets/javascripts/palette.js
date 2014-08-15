@@ -111,10 +111,10 @@
     var updatePaletteButtons = function(){
       if (activePalette.length != 0){
         _.id('userMenuNewPaletteButton').classList.remove('active');
-        _.id('userMenuEditorButton').classList.add('active');
+        _.show(_.id('userMenuEditorButton'));
       } else {
         _.id('userMenuNewPaletteButton').classList.add('active');
-        _.id('userMenuEditorButton').classList.remove('active');
+        _.hide(_.id('userMenuEditorButton'));
       }
     };
     var removeColor = function(index){

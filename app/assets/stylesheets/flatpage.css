@@ -20,7 +20,7 @@ a {
   text-decoration: none;
   color: #eb0079;
 }
-a.button, button {
+a.button, button, input[type="submit"] {
   display: inline-block;
   margin-top: 0.5em;
   padding: 0.5em 1em;
@@ -37,7 +37,7 @@ a.button:hover {
 button, input {
   font-family: inherit;
 }
-button + a {
+button + a, input[type="submit"] + a {
   margin-left: 20px;
 }
 abbr {
@@ -65,8 +65,8 @@ input[type=text]:focus, input[type=email]:focus,
 input[type=password]:focus {
   border-color: #eb0079;
 }
-button:focus, a.button:focus,
-button:active, a.button:active {
+input[type="submit"]:focus, button:focus, a.button:focus,
+input[type="submit"]:active, button:active, a.button:active {
   background: #fff;
   color: #eb0079;
 }

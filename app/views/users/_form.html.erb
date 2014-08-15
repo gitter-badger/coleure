@@ -1,4 +1,12 @@
-<%= user.errors.full_messages %>
+<% if user.errors.present? %>
+  <h4>There were some errors:</h4>
+
+  <ul class="form-errors">
+    <% user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= form_for user do |f| %>
   <p>

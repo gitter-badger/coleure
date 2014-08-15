@@ -1,10 +1,12 @@
 class Palette < ActiveRecord::Base
 	belongs_to :user
 
-	belongs_to :parent,   class_name: self, foreign_key: :parent_id
+	belongs_to :parent,   class_name: self, foreign_key: :parent_id, counter_cache: true
 	has_many   :children, class_name: self, foreign_key: :parent_id, dependent: :destroy
 
 	has_many :colors, -> { order("position ASC") }
+
+	scope :leafs, -> { where children_count: 0 }
 
 	def self.with_color(params)
 		old_palette = find(params[:palette_id]) if params[:palette_id]

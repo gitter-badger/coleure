@@ -7,10 +7,11 @@
   data-hex="{{ hex }}"
   data-rgb="{{ rgb }}"
   data-hsl="{{ hsl }}"
+  data-id="{{ id }}"
   data-mixed="{{ mixed }}"
   data-origin="{{ origin }}"
   style="background: #{{ hex }}">
-	<span class="name">{% if (mixed == "true") { %}<strong class="mix-mark" data-hex="{{ hex }}">M</strong>{% } %}{{ name }}</span>
+	<span class="name">{% if (mixed == true || mixed == "true") { %}<strong class="mix-mark" data-hex="{{ hex }}">M</strong>{% } %}{{ name }}</span>
 </i>
 {% } else { %}
 <div class="item empty-color"></div>

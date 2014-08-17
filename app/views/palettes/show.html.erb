@@ -1,6 +1,6 @@
 <div class="palette-page">
   <h1 id="logo">
-    <div class="text">Colombia</div>
+    <div class="text">No. <%= @palette.id %></div>
     <div class="color-code">
       <a id="format_status"><span id="current_color_code">Hover any color</span>
         <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -22,56 +22,26 @@
       </div>
     </div>
   </h1>
-  <button>Library</button>
-  <button>Palette settings</button>
-  <div class="active-palette">
-    <article
-      draggable="true"
-      class="item color"
-      data-name="Yellow"
-      data-hex="f8e71c"
-      data-rgb="248, 231, 28"
-      data-hsl="55, 94%, 54%"
-      data-mixed="false"
-      data-origin="palette"
-      style="background: #f8e71c;">
-      <section class="color-info">
-        <h1>Yellow</h1>
-        <p>Top part of the flag.<br>Height: 2/4.</p>
-        <p><button class="secondary">Edit</button></p>
-      </section>
-    </article>
-    <article
-      draggable="true"
-      class="item color"
-      data-name="Yellow"
-      data-hex="f8e71c"
-      data-rgb="248, 231, 28"
-      data-hsl="55, 94%, 54%"
-      data-mixed="false"
-      data-origin="palette"
-      style="background: #5683e3;">
-      <section class="color-info">
-        <h1>3394</h1>
-        <p>Middle part of the flag.<br>Height: 1/4.</p>
-        <p><button class="secondary">Edit</button></p>
-      </section>
-    </article>
-    <article
-      draggable="true"
-      class="item color"
-      data-name="Yellow"
-      data-hex="f8e71c"
-      data-rgb="248, 231, 28"
-      data-hsl="55, 94%, 54%"
-      data-mixed="false"
-      data-origin="palette"
-      style="background: #e03c23;">
-      <section class="color-info">
-        <h1>Red</h1>
-        <p>Bottom part of flag.<br>Height: 1/4.</p>
-        <p><button class="secondary">Edit</button></p>
-      </section>
-    </article>
+  <a class="button back" href="/palettes/<%= @palette.id %>/edit">Edit</a>
+  <div id="shared_palette_colors" class="active-palette">
+  	<% for color in @palette.colors.reorder('position DESC') %>
+	    <article
+	      class="item color"
+	      data-name="<%= color.name %>"
+	      data-hex="<%= color.hex %>"
+	      data-rgb="<%= color.rgb %>"
+	      data-hsl="<%= color.hsl %>"
+	      data-mixed="<%= color.mixed %>"
+	      data-origin="palette"
+	      style="background: #<%= color.hex %>;">
+	      <h1><% if color.mixed %><strong class="mix-mark">M</strong><% end %><%= color.name %></h1>
+	      <% if false %>
+		      <section class="color-info">
+		        <h1><%= color.name %></h1>
+		        <p>Top part of the flag.<br>Height: 2/4.</p><p><button class="secondary">Edit</button></p>
+		      </section>
+	      <% end %>
+	    </article>
+    <% end %>
   </div>
 </div>

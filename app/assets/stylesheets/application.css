@@ -46,6 +46,7 @@ body {
 a {
 	color: #0083b1;
 	cursor: pointer;
+	text-decoration: none;
 }
 
 aside, footer, header, section {
@@ -59,7 +60,9 @@ button.join, button.secondary {
 button.secondary {
 	color: #fff;
 }
-button, button.active, button[data-state=active] {
+button, button.active, button[data-state=active],
+a.button {
+	display: inline-block;
 	padding: 5px 10px;
 	font-family: inherit;
 	font-weight: bold;
@@ -68,6 +71,23 @@ button, button.active, button[data-state=active] {
 	color: #232323;
 	background: #fff;
 	cursor: pointer;
+}
+button.back, a.button.back {
+	position: relative;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 10px;
+	margin-left: 15px;
+}
+button.back::before, a.button.back::before {
+	content: '';
+	position: absolute;
+	right: 100%;
+	width: 0;
+	height: 0;
+	border: 15px solid transparent;
+	border-right-color: #fff;
+	border-left: none;
 }
 kbd {
 	padding: 2px 5px;
@@ -789,30 +809,6 @@ input[type=range]::-webkit-slider-thumb {
 	height: 25px;
 }
 
-/* Modal */
-.modal {
-	background: #fff;
-	position: absolute;
-	top: 0; left: 0; right: 0;
-	z-index: 9999;
-	padding: 30px;
-	font-size: 20px;
-}
-.modal .close {
-	position: absolute;
-	top: 0; right: 0;
-}
-.modal strong {
-	text-transform: uppercase;
-	font-size: 0.75em;
-}
-.modal p {
-	margin-bottom: 20px;
-}
-.modal p + p {
-	margin-bottom: 0;
-}
-
 /* Animations */
 @-webkit-keyframes scalemation {
 	0%   { height: 0px; }
@@ -941,7 +937,18 @@ i.drop {
 	}
 }
 
-/*  Share view  */
+/* Share functionality */
+.share-button {
+	padding-right: 20px;
+}
+#shareButton {
+	display: inline-block;
+	width: 100%;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+/* Share view */
 .palette-page {
 	height: 100%;
 	overflow: scroll;
@@ -954,6 +961,8 @@ i.drop {
 	width: 100%;
 	height: 200px;
 	margin-bottom: 50px;
+	float: none;
+	cursor: default;
 }
 .active-palette .color-info {
 	width: 25%;
@@ -967,9 +976,19 @@ i.drop {
 	font-size: 48px;
 	color: #fff;
 }
+.active-palette h1 {
+	position: absolute;
+	margin-top: -40px;
+	margin-left: 20px;
+}
 .active-palette p {
 	margin-bottom: 20px;
 	font-size: 16px;
 	line-height: 1.5;
 	color: #ccc;
+}
+.palette-page a.button.back {
+	position: fixed;
+	top: 20px;
+	left: 20px;
 }

@@ -36,7 +36,7 @@
             colors: colors
           });
         });
-        
+
         return _.template(sources.template, function(template) {
           return _this._display({
             template: template

@@ -89,7 +89,7 @@
     <h1>Palettes</h1>
     <div class="columns">
     <% @palettes.each do |palette| %>
-      <a class="palette" href="/palettes/<%= palette.id %>/edit">
+      <a class="palette" href="/palettes/<%= palette.id %>">
         <h2>No. <%= palette.id %></h2>
         <% palette.colors.each do |color| %>
           <span class="color" style="background: #<%= color.hex %>;"></span>

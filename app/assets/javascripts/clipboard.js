@@ -16,7 +16,7 @@
         _.id('appPrice').style.backgroundColor = '#'+_.attr(color, "data-hex");
         Color('#'+_.attr(color, "data-hex")).light() ? _.id('appPrice').style.color = "#232323" :_.id('appPrice').style.color = "#fff";
       };
-      _.id('learnMoreLink').style.color = '#'+_.attr(color, "data-hex");
+      if(_.id('learnMoreLink')){_.id('learnMoreLink').style.color = '#'+_.attr(color, "data-hex")};
       Color('#'+_.attr(color, "data-hex")).light() ? format_status.style.color = "#232323" :format_status.style.color = "#fff";
       Color('#'+_.attr(color, "data-hex")).light() ? _.attr(_.id('settingsIcon'), 'fill', '#232323') : _.attr(_.id('settingsIcon'), 'fill', '#fff');
       return clipboard_handler.select();
@@ -34,9 +34,10 @@
       formatSettingsStatus ? format_status.classList.remove('active') : format_status.classList.add('active');
       formatSettingsStatus = !formatSettingsStatus;
     };
-    _.listen(_.id('colors'), 'mouseover', verifyIfColor);
-    _.listen(_.id('panels'), 'mouseover', verifyIfColor);
-    _.listen(_.id('palette'), 'mouseover', verifyIfColor);
+    if(_.id('colors')){_.listen(_.id('colors'), 'mouseover', verifyIfColor);}
+    if(_.id('panels')){_.listen(_.id('panels'), 'mouseover', verifyIfColor);}
+    if(_.id('palette')){_.listen(_.id('palette'), 'mouseover', verifyIfColor);}
+    if(_.id('shared_palette_colors')){_.listen(_.id('shared_palette_colors'), 'mouseover', verifyIfColor);}
     _.listen(format_status, 'click', toggleSettings);
 
     canvas = document.createElement('canvas');

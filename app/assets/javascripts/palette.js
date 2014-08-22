@@ -52,6 +52,10 @@
     var updateTitle = function(number){
       _.id('activePalette').innerHTML = number? 'No. '+number : 'New';
     }
+    var updateShareButton = function(number){
+      _.show(_.id('shareButton'))
+      _.attr(_.id('shareButton'), 'href', '/palettes/'+number)
+    }
     var addColor = function(data){
       var request = new XMLHttpRequest();
       request.open("POST", "/colors", true);
@@ -61,6 +65,7 @@
         history.pushState(null, null, window.location.origin + "/palettes/" + requestData["id"] + "/edit")
         currentPalette = requestData["id"]
         updateTitle(requestData["id"])
+        updateShareButton(requestData["id"])
         _.json('/palettes/'+requestData["id"]+'.json', function(colors){
           data.id = colors[colors.length-1].id;
           _.attr(paletteColors.children.item(0), 'data-id', data.id);
@@ -130,6 +135,7 @@
         history.pushState(null, null, window.location.origin + "/palettes/" + requestData["id"] + "/edit")
         currentPalette = requestData["id"]
         updateTitle(requestData["id"])
+        updateShareButton(requestData["id"])
       };
       request.setRequestHeader('Accept', 'application/json');
       request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
@@ -180,6 +186,7 @@
           updatePaletteButtons();
         })
         updateTitle(url[2])
+        updateShareButton(url[2])
         currentPalette = url[2]
       } else {
         activePalette = [];

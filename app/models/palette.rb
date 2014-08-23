@@ -6,6 +6,7 @@ class Palette < ActiveRecord::Base
 
 	has_many :colors, -> { order("position ASC") }
 
+	scope :roots, -> { where parent_id: nil }
 	scope :leafs, -> { where children_count: 0 }
 
 	def self.with_color(params)

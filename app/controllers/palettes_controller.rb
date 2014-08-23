@@ -1,8 +1,5 @@
 class PalettesController < ApplicationController
-<<<<<<< HEAD
-=======
   before_action :set_palette, only: [:show, :edit, :download]
->>>>>>> master
 
   def new;  end
   def edit; end

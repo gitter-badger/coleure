@@ -1,5 +1,5 @@
 class PalettesController < ApplicationController
-  before_action :set_palette, only: [:show, :edit, :download]
+  before_action :current_resource, only: [:show, :edit, :download]
 
   def new;  end
   def edit; end

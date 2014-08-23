@@ -30,6 +30,7 @@ GEM
     acts_as_list (0.4.0)
       activerecord (>= 3.0)
     arel (5.0.1.20140414130214)
+    ase (2.0.0)
     bcrypt (3.1.7)
     builder (3.2.2)
     erubis (2.7.0)
@@ -110,6 +111,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list
+  ase
   bcrypt (~> 3.1.7)
   guachiman-rails
   jbuilder (~> 2.0)

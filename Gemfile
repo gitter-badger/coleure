@@ -34,6 +34,8 @@ gem 'guachiman-rails'
 
 gem 'kaminari'
 
+gem 'ase'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

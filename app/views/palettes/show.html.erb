@@ -22,7 +22,9 @@
       </div>
     </div>
   </h1>
-  <a class="button back" href="/palettes/<%= @palette.id %>/edit">Edit</a>
+  <div class="palette-options">
+  	<%= link_to "Download (.ase)", download_palette_path, class: "button secondary" %><%= link_to "Edit", edit_palette_path, class: "button" %>
+  </div>
   <div id="shared_palette_colors" class="active-palette">
   	<% for color in @palette.colors.reorder('position DESC') %>
 	    <article

@@ -38,7 +38,8 @@ aside, footer, header, section {
 	display: block;
 }
 
-button.join, button.secondary {
+button.join, button.secondary,
+a.button.secondary {
 	background: #111;
 	color: #999;
 }
@@ -1010,8 +1011,9 @@ i.menu-user {
 	line-height: 1.5;
 	color: #ccc;
 }
-.palette-page a.button.back {
+.palette-options {
 	position: fixed;
-	top: 20px;
-	left: 20px;
+	bottom: 0;
+	right: 0;
+	z-index: 9;
 }

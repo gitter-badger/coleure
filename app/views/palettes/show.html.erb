@@ -26,24 +26,30 @@
   	<%= link_to "Download (.ase)", download_palette_path, class: "button secondary" %><%= link_to "Edit", edit_palette_path, class: "button" %>
   </div>
   <div id="shared_palette_colors" class="active-palette">
-  	<% for color in @palette.colors.reorder('position DESC') %>
-	    <article
-	      class="item color"
-	      data-name="<%= color.name %>"
-	      data-hex="<%= color.hex %>"
-	      data-rgb="<%= color.rgb %>"
-	      data-hsl="<%= color.hsl %>"
-	      data-mixed="<%= color.mixed %>"
-	      data-origin="palette"
-	      style="background: #<%= color.hex %>;">
-	      <h1><% if color.mixed %><strong class="mix-mark">M</strong><% end %><%= color.name %></h1>
-	      <% if false %>
-		      <section class="color-info">
-		        <h1><%= color.name %></h1>
-		        <p>Top part of the flag.<br>Height: 2/4.</p><p><button class="secondary">Edit</button></p>
-		      </section>
-	      <% end %>
-	    </article>
-    <% end %>
+  	<table class="fullscreen" cellspacing="0">
+      <% for color in @palette.colors.reorder('position DESC') %>
+        <tr>
+          <td>
+            <article
+              class="item color"
+              data-name="<%= color.name %>"
+              data-hex="<%= color.hex %>"
+              data-rgb="<%= color.rgb %>"
+              data-hsl="<%= color.hsl %>"
+              data-mixed="<%= color.mixed %>"
+              data-origin="palette"
+              style="background: #<%= color.hex %>;">
+              <h1><% if color.mixed %><strong class="mix-mark">M</strong><% end %><%= color.name %></h1>
+              <% if false %>
+                <section class="color-info">
+                  <h1><%= color.name %></h1>
+                  <p>Top part of the flag.<br>Height: 2/4.</p><p><button class="secondary">Edit</button></p>
+                </section>
+              <% end %>
+            </article>
+          </td>
+        </tr>
+      <% end %>
+    </table>
   </div>
 </div>

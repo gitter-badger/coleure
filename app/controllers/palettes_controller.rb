@@ -5,7 +5,7 @@ class PalettesController < ApplicationController
   def edit; end
 
   def index
-    @palettes = Palette.all.order("created_at DESC")
+    @palettes = Palette.page(params[:page]).per(50).order("created_at DESC")
     render layout: false
   end
 

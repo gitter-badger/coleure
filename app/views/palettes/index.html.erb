@@ -24,17 +24,36 @@
         max-width: 100%;
         margin-bottom: 2em;
       }
+      .pagination {
+        display: inline-block;
+        padding: 0.25em 0.75em;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 16px;
+        color: #333;
+        background: #131313;
+      }
+      .pagination span {
+        margin: 0 0.3em;
+      }
+      .pagination a {
+        color: #fff;
+      }
+      .pagination a:hover {
+        color: #eb0079;
+      }
       a {
         text-decoration: none;
         color: #fff;
       }
       a.button {
         display: inline-block;
-        margin-top: 0.5em;
+        vertical-align: middle;
+        margin-left: 20px;
         padding: 0.5em 1em;
         text-transform: uppercase;
         font-weight: bold;
-        font-size: 18px;
+        font-size: 12px;
         color: #232323;
         background: #fff;
       }
@@ -86,7 +105,7 @@
     </script>
   </head>
   <body>
-    <h1>Palettes</h1>
+    <h1>Palettes <a href="/" class="button">Create Palette</a></h1>
     <div class="columns">
     <% @palettes.each do |palette| %>
       <a class="palette" href="/palettes/<%= palette.id %>">
@@ -97,6 +116,6 @@
       </a>
     <% end %>
     </div>
-    <a href="/" class="button">Go back to Coleure</a>
+    <p><%= paginate @palettes %></p>
   </body>
 </html>
